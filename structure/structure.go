@@ -10,6 +10,10 @@ func Area(rectangle Rectangle) float64 {
 	return rectangle.Width * rectangle.Height
 }
 
+func (t Triangle) AreaSecond() float64 {
+	return (t.Base * t.Height) * 0.5
+}
+
 func (r Rectangle) AreaSecond() float64 {
 	return r.Width * r.Height
 }
