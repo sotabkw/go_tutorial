@@ -1,5 +1,7 @@
 package pointer
 
+type BitCoin int
+
 type Wallet struct {
-	balance int
+	balance BitCoin
 }
