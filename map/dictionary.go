@@ -22,3 +22,13 @@ func (d Dictionary) Add(word, definition string) {
 func Search(dictionary map[string]string, word string) string {
 	return dictionary[word]
 }
+
+var (
+	ErrNotFounds  = errors.New("could not find the word you were looking for")
+	ErrWordExists = errors.New("cannot add word because it already exists")
+)
+
+func (d Dictionary) AddSecond(word, definition string) error {
+	d[word] = definition
+	return nil
+}
