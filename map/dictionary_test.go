@@ -54,3 +54,39 @@ func assertStrings(t *testing.T, got, want string) {
 		t.Errorf("got %q want %q", got, want)
 	}
 }
+
+func TestAddSecond(t *testing.T) {
+	t.Run("new word", func(t *testing.T) {
+		dictionary := Dictionary{}
+		word := "test"
+		definition := "this is just a test"
+
+		err := dictionary.AddSecond(word, definition)
+
+		assertErrorSecond(t, err, nil)
+		assertDefinition(t, dictionary, word, definition)
+	})
+
+	t.Run("existing word", func(t *testing.T) {
+		word := "test"
+		definition := "this is just a test"
+		dictionary := Dictionary{word: definition}
+		err := dictionary.AddSecond(word, "new test")
+
+		assertErrorSecond(t, err, ErrWordExists)
+		assertDefinition(t, dictionary, word, definition)
+	})
+}
+
+func assertErrorSecond(t *testing.T, got, want error) {
+	t.Helper()
+	if got != want {
+		t.Errorf("got %q want %q", got, want)
+	}
+	if got == nil {
+		if want == nil {
+			return
+		}
+		t.Fatal("expected to get an error.")
+	}
+}
